@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade de Desenvolvimento</title>
+    <script>
+        function rodarFibonnaci() {
+            let n = parseInt(document.getElementById("Fibonnaci").value);
+            let fibonacciSequence = "";
+            let a = 0, b = 1;
+
+            for (let i = 0; i < n; i++) {
+                fibonacciSequence += a + " ";
+
+                const c = a + b;
+                a = b;
+                b = c;
+            }
+            document.getElementById("FibonacciResposta").innerHTML = fibonacciSequence;
+        }
+        function rodarPrimo() {
+            function isPrime(number) {
+                if (number <= 1) {
+                    return false;
+                }
+                for (let i = 2; i < number; i++) {
+                    if (number % i === 0) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            let numero = parseInt(document.getElementById("Primo").value);
+            let primoResposta = "";
+            primoResposta += ("O numero " + numero);
+            if (isPrime(numero)) {
+                primoResposta += (" é primo");
+            } else {
+                primoResposta += (" não é primo");
+            }
+            document.getElementById("PrimoResposta").innerHTML = primoResposta;
+        }
+        function rodarOrdenacao() {
+            function quicksort(array) {
+                if (array.length <= 1) {
+                    return array;
+                } else {
+                    const pivot = array[Math.floor(Math.random() * array.length)];
+                    const menores = [];
+                    const maiores = [];
+                    const iguais = [];
+                    for (let i = 0; i < array.length; i++) {
+                        if (array[i] < pivot) {
+                            menores.push(array[i]);
+                        } else if (array[i] > pivot) {
+                            maiores.push(array[i]);
+                        } else {
+                            iguais.push(array[i]);
+                        }
+                    }
+                    const ordenadosMenores = quicksort(menores);
+                    const ordenadosMaiores = quicksort(maiores);
+                    return ordenadosMenores.concat(iguais).concat(ordenadosMaiores);
+                }
+            }
+
+            let vetorString = document.getElementById("Ordenacao").value;
+            let vetor = vetorString.split(" ").map(Number);
+            let respostaOrdenacao1 = ("Dado o Vetor: " + vetor);
+            const vetorOrdenado = quicksort(vetor);
+            let respostaOrdenacao2 = ("Segue o vetor ordenado: " + vetorOrdenado);
+            document.getElementById("OrdenacaoResposta1").innerHTML = respostaOrdenacao1;
+            document.getElementById("OrdenacaoResposta2").innerHTML = respostaOrdenacao2;
+        }
+
+        function rodarContagem() {
+            let vetorString = document.getElementById("Contagem").value;
+            let vetor = vetorString.split(" ").map(Number);
+            let respostaContagem1 = ("Dado o Vetor: " + vetor);
+
+            var valor = parseInt(0);
+            for (var x = 0; x < vetor.length; x++) {
+                if (parseInt(vetor[x]) == vetor[x]) {
+                    valor = valor + 1;
+                }
+            }
+
+            let respostaContagem2 = ("Existe(m) " + valor + " valor(es) inteiro(s) na sequência dada");
+            document.getElementById("ContagemResposta1").innerHTML = respostaContagem1;
+            document.getElementById("ContagemResposta2").innerHTML = respostaContagem2;
+        }
+
+        function rodarSomatorio() {
+            let vetorString = document.getElementById("Somatorio").value;
+            let vetor = vetorString.split(" ").map(Number);
+            var soma = parseInt(0);
+            let respostaSomatorio1 = ("Dado o vetor:" + vetor);
+
+            for (var x = 0; x < vetor.length; x++) {
+                soma = soma + vetor[x];
+            }
+
+            let respostaSomatorio2 = ("O somatório é: " + soma);
+
+            document.getElementById("SomatorioResposta1").innerHTML = respostaSomatorio1;
+            document.getElementById("SomatorioResposta2").innerHTML = respostaSomatorio2;
+        }
+
+        function rodarMDC() {
+            let vetorString = document.getElementById("MDC").value;
+            let vetor = vetorString.split(" ").map(Number);
+
+            const a=vetor[0];
+            const b=vetor[1];
+
+            const menor = (a < b) ? a : b;
+
+            let mdc = menor;
+
+            while (mdc > 0) {
+
+                if (a % mdc === 0 && b % mdc === 0) {
+                    break;
+                } else {
+                    mdc--;
+                }
+            }
+            
+            let respostaMDC = ("O máximo divisor comum de " + a + " e " + b + " é " + mdc);
+
+            document.getElementById("MDCResposta").innerHTML = respostaMDC;
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <h1>Atividade de Ambiente de desenvolvimento de Softwares</h1>
+        <p>Aluno - Gabriel Feitosa de Carvalho Barbosa</p>
+        <p>Matricula - 2225850</p>
+        <p></p>
+        <h2>Questões:</h2>
+        <section>
+            <p>Para acessar os códigos em Java, <a href="https://replit.com/@GabrielFeitosa6/Questoes-Java-Ambiente-de-Desn?v=1">clique aqui</a> </p>
+        </section>
+        <section>
+            <h3>Fibonnaci - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite quantos numeros da sequencia de Fibonnaci gostaria de ver</legend>
+                    <input type="text" id="Fibonnaci" name="inputFibJS" placeholder="Ex:1,2,3..." required>
+                    <button type="button" onclick="rodarFibonnaci()">Rodar</button>
+                    <div id="FibonacciResposta"></div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Numero Primo - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite um numero para saber se ele é primo</legend>
+                    <input type="text" id="Primo" name="inputPrimoJS" placeholder="Ex:1,2,3..." required>
+                    <button type="button" onclick="rodarPrimo()">Rodar</button>
+                    <div id="PrimoResposta"></div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Ordenação de números - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite os números que gostaria de ordenar, separados por um espaço</legend>
+                    <input type="text" id="Ordenacao" name="inputOrdenacaoJS" placeholder="Ex:7 10 4 17..." required>
+                    <button type="button" onclick="rodarOrdenacao()">Rodar</button>
+                    <div id="OrdenacaoResposta1"></div>
+                    <div id="OrdenacaoResposta2"></div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Contagem de números inteiros - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite os números para contar os inteiros, separados por um espaço</legend>
+                    <input type="text" id="Contagem" name="inputContagemJS" placeholder="Ex:7.1 10 4.4 17..." required>
+                    <button type="button" onclick="rodarContagem()">Rodar</button>
+                    <div id="ContagemResposta1"></div>
+                    <div id="ContagemResposta2"></div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Soma de números - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite os números que gostaria de somar, separados por um espaço</legend>
+                    <input type="text" id="Somatorio" name="inputSomatorioJS" placeholder="Ex:2 2" required>
+                    <button type="button" onclick="rodarSomatorio()">Rodar</button>
+                    <div id="SomatorioResposta1"></div>
+                    <div id="SomatorioResposta2"></div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Soma de números - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite os números que gostaria de somar, separados por um espaço</legend>
+                    <input type="text" id="Somatorio" name="inputSomatorioJS" placeholder="Ex:2 2" required>
+                    <button type="button" onclick="rodarSomatorio()">Rodar</button>
+                    <div id="SomatorioResposta1"></div>
+                    <div id="SomatorioResposta2"></div>
+                </fieldset>
+            </form>
+        </section>
+        <section>
+            <h3>Máximo Divisor Comum - Javascript</h3>
+            <form>
+                <fieldset>
+                    <legend>Digite os dois números que se quer o MDC, separados por um espaço</legend>
+                    <input type="text" id="MDC" name="inputMDCJS" placeholder="Ex:75 105" required>
+                    <button type="button" onclick="rodarMDC()">Rodar</button>
+                    <div id="MDCResposta"></div>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
